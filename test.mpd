@@ -1,0 +1,354 @@
+<?xml version="1.0"?>
+<MPD
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="urn:mpeg:dash:schema:mpd:2011"
+    xsi:schemaLocation="urn:mpeg:dash:schema:mpd:2011 http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-DASH_schema_files/DASH-MPD.xsd"
+    type="static"
+    mediaPresentationDuration="PT1388.950S"
+    minBufferTime="PT10S"
+    profiles="urn:mpeg:dash:profile:full:2011">
+  <Period>
+    <AdaptationSet
+        id="1"
+        segmentAlignment="true"
+        maxWidth="1920"
+        maxHeight="1080"
+        maxFrameRate="45000/1877">
+        <SegmentTemplate
+            timescale="1000"
+            media="fragment-$Number$-$RepresentationID$.m4s?t=st=1565665078~exp=1565751478~acl=/evs/b494dea5a7996405a97a81267508df45/assets/a35a88f5636db68bf5764ab7f1606b88_*~hmac=ca2c5cd00f6317f22e673d1541052d6dd0c0fad7b2ede041efd5434cd40dfa9f"
+            initialization="init-$RepresentationID$.mp4?t=st=1565665078~exp=1565751478~acl=/evs/b494dea5a7996405a97a81267508df45/assets/a35a88f5636db68bf5764ab7f1606b88_*~hmac=ca2c5cd00f6317f22e673d1541052d6dd0c0fad7b2ede041efd5434cd40dfa9f"
+            startNumber="1">
+            <SegmentTimeline>
+                <S d="3921"/>
+                <S d="4004"/>
+                <S d="5923"/>
+                <S d="9051"/>
+                <S d="10010"/>
+                <S d="11220"/>
+                <S d="10010"/>
+                <S d="9635"/>
+                <S d="10135"/>
+                <S d="10010"/>
+                <S d="8967"/>
+                <S d="10010"/>
+                <S d="9843"/>
+                <S d="11762"/>
+                <S d="8008"/>
+                <S d="10969"/>
+                <S d="9301"/>
+                <S d="10469"/>
+                <S d="10886"/>
+                <S d="9092"/>
+                <S d="9635"/>
+                <S d="10469"/>
+                <S d="9343"/>
+                <S d="10010" r="1"/>
+                <S d="11553"/>
+                <S d="9092"/>
+                <S d="10010"/>
+                <S d="9885"/>
+                <S d="9760"/>
+                <S d="11011"/>
+                <S d="9551"/>
+                <S d="9718"/>
+                <S d="10010"/>
+                <S d="9301"/>
+                <S d="9968"/>
+                <S d="11261"/>
+                <S d="9510"/>
+                <S d="10010"/>
+                <S d="11136"/>
+                <S d="9885"/>
+                <S d="10010" r="1"/>
+                <S d="10010"/>
+                <S d="10010"/>
+                <S d="9259"/>
+                <S d="9801"/>
+                <S d="9468"/>
+                <S d="9885"/>
+                <S d="11386"/>
+                <S d="10010" r="1"/>
+                <S d="9009"/>
+                <S d="11053"/>
+                <S d="9968"/>
+                <S d="8884"/>
+                <S d="10886"/>
+                <S d="9510"/>
+                <S d="9301"/>
+                <S d="11220"/>
+                <S d="9009"/>
+                <S d="10010"/>
+                <S d="10010"/>
+                <S d="10260"/>
+                <S d="9510"/>
+                <S d="11011"/>
+                <S d="10010"/>
+                <S d="9259"/>
+                <S d="10010"/>
+                <S d="11261"/>
+                <S d="9259"/>
+                <S d="10010"/>
+                <S d="10511"/>
+                <S d="10010"/>
+                <S d="10010"/>
+                <S d="9259"/>
+                <S d="10010"/>
+                <S d="9051"/>
+                <S d="11970"/>
+                <S d="9259"/>
+                <S d="9259"/>
+                <S d="9760"/>
+                <S d="11512"/>
+                <S d="9760"/>
+                <S d="9259"/>
+                <S d="10010" r="2"/>
+                <S d="10511"/>
+                <S d="9051"/>
+                <S d="10010"/>
+                <S d="9760"/>
+                <S d="10010" r="1"/>
+                <S d="10010"/>
+                <S d="10886"/>
+                <S d="9009"/>
+                <S d="11512"/>
+                <S d="9885"/>
+                <S d="10010"/>
+                <S d="10010"/>
+                <S d="9009"/>
+                <S d="10010" r="1"/>
+                <S d="9551"/>
+                <S d="11220"/>
+                <S d="10010"/>
+                <S d="9259"/>
+                <S d="9885"/>
+                <S d="9635"/>
+                <S d="11011"/>
+                <S d="8967"/>
+                <S d="11094"/>
+                <S d="8967"/>
+                <S d="11261"/>
+                <S d="10010"/>
+                <S d="9510"/>
+                <S d="9259"/>
+                <S d="10010"/>
+                <S d="10010"/>
+                <S d="10886"/>
+                <S d="10385"/>
+                <S d="9510"/>
+                <S d="10010"/>
+                <S d="11011"/>
+                <S d="9885"/>
+                <S d="9426"/>
+                <S d="9927"/>
+                <S d="10302"/>
+                <S d="9384"/>
+                <S d="10010" r="1"/>
+                <S d="9968"/>
+                <S d="10010"/>
+                <S d="11011"/>
+                <S d="8550"/>
+                <S d="10010"/>
+                <S d="9927"/>
+                <S d="11470"/>
+                <S d="9468"/>
+                <S d="4922"/>
+            </SegmentTimeline>
+        </SegmentTemplate>
+      <Representation
+          id="f1-v1-x3"
+          mimeType="video/mp4"
+          codecs="avc1.640028"
+          width="1280"
+          height="720"
+          frameRate="45000/1877"
+          sar="1:1"
+          startWithSAP="1"
+          bandwidth="2385455">
+      </Representation>
+      <Representation
+          id="f2-v1-x3"
+          mimeType="video/mp4"
+          codecs="avc1.640028"
+          width="1920"
+          height="1080"
+          frameRate="45000/1877"
+          sar="1:1"
+          startWithSAP="1"
+          bandwidth="5748217">
+      </Representation>
+      <Representation
+          id="f3-v1-x3"
+          mimeType="video/mp4"
+          codecs="avc1.4d401f"
+          width="848"
+          height="480"
+          frameRate="45000/1877"
+          sar="1:1"
+          startWithSAP="1"
+          bandwidth="831308">
+      </Representation>
+      <Representation
+          id="f4-v1-x3"
+          mimeType="video/mp4"
+          codecs="avc1.4d401e"
+          width="640"
+          height="360"
+          frameRate="45000/1877"
+          sar="1:1"
+          startWithSAP="1"
+          bandwidth="416162">
+      </Representation>
+      <Representation
+          id="f5-v1-x3"
+          mimeType="video/mp4"
+          codecs="avc1.42c015"
+          width="428"
+          height="240"
+          frameRate="45000/1877"
+          sar="1:1"
+          startWithSAP="1"
+          bandwidth="301891">
+      </Representation>
+    </AdaptationSet>
+    <AdaptationSet
+        id="2"
+        segmentAlignment="true">
+      <AudioChannelConfiguration
+          schemeIdUri="urn:mpeg:dash:23003:3:audio_channel_configuration:2011"
+          value="1"/>
+        <SegmentTemplate
+            timescale="1000"
+            media="fragment-$Number$-$RepresentationID$.m4s?t=st=1565665078~exp=1565751478~acl=/evs/b494dea5a7996405a97a81267508df45/assets/a35a88f5636db68bf5764ab7f1606b88_*~hmac=ca2c5cd00f6317f22e673d1541052d6dd0c0fad7b2ede041efd5434cd40dfa9f"
+            initialization="init-$RepresentationID$.mp4?t=st=1565665078~exp=1565751478~acl=/evs/b494dea5a7996405a97a81267508df45/assets/a35a88f5636db68bf5764ab7f1606b88_*~hmac=ca2c5cd00f6317f22e673d1541052d6dd0c0fad7b2ede041efd5434cd40dfa9f"
+            startNumber="1">
+            <SegmentTimeline>
+                <S d="2508"/>
+                <S d="4992"/>
+                <S d="5016"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008"/>
+                <S d="10008"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008"/>
+                <S d="10008"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008"/>
+                <S d="10008"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008"/>
+                <S d="10008"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="9985"/>
+                <S d="10008" r="1"/>
+                <S d="6434"/>
+            </SegmentTimeline>
+        </SegmentTemplate>
+      <Representation
+          id="f1-a1-x3"
+          mimeType="audio/mp4"
+          codecs="mp4a.40.2"
+          audioSamplingRate="44100"
+          startWithSAP="1"
+          bandwidth="128001">
+      </Representation>
+      <Representation
+          id="f3-a1-x3"
+          mimeType="audio/mp4"
+          codecs="mp4a.40.2"
+          audioSamplingRate="44100"
+          startWithSAP="1"
+          bandwidth="96001">
+      </Representation>
+      <Representation
+          id="f5-a1-x3"
+          mimeType="audio/mp4"
+          codecs="mp4a.40.2"
+          audioSamplingRate="22050"
+          startWithSAP="1"
+          bandwidth="64000">
+      </Representation>
+    </AdaptationSet>
+  </Period>
+</MPD>
