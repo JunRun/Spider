@@ -16,32 +16,37 @@ headers = {
 
 # 获取视频id,名字，图片
 def get_video_id(url, page):
-    time.sleep(1)
-    url = url + str(page)
-    s = requests.session()
-    s.keep_alive = False
-    res = s.get(url, headers=headers)
-    html = etree.HTML(res.content)
-    for rows in range(1, 41):
-        rows = str(rows)
-        video_id = html.xpath("//li[" + rows + "]/@id")
-        episode_url = html.xpath("//li[" + rows + "]/div/a/@href")
-        video_img = html.xpath("//li[" + rows + "]/div/a/span[1]/img/@src")
-        video_name = html.xpath("//li[" + rows + "]/div/a/span[2]/text()")
-        if len(video_id):
-            arry = get_more_info(str(episode_url[0]), video_id)
-            movie_insert(video_id[0], video_name[0], video_img[0], episode_url[0], arry[2], arry[1], arry[0], arry[4],
+    try:
+        time.sleep(4)
+        print("-----------------"+str(page)+"------------------------")
+        url = url + str(page)
+        s = requests.session()
+        s.keep_alive = False
+        res = s.get(url, headers=headers)
+        html = etree.HTML(res.content)
+        for rows in range(1, 41):
+            rows = str(rows)
+            video_id = html.xpath("//li[" + rows + "]/@id")
+            episode_url = html.xpath("//li[" + rows + "]/div/a/@href")
+            video_img = html.xpath("//li[" + rows + "]/div/a/span[1]/img/@src")
+            video_name = html.xpath("//li[" + rows + "]/div/a/span[2]/text()")
+            if len(video_id):
+                arry = get_more_info(str(episode_url[0]), video_id)
+                movie_insert(video_id[0], video_name[0], video_img[0], episode_url[0], arry[2], arry[1], arry[0], arry[4],
                          arry[3])
-        else:
-            break
-
-    return 0
+            else:
+                break
+    except Exception as e:
+        print(e)
+        raise e
 
 
 def get_episode_url(episode_url):
     country = ""
+    s = requests.session()
+    s.keep_alive = False
     url = "https://www.crunchyroll.com" + country + episode_url[0]
-    res = requests.get(url, headers=headers)
+    res = s.get(url, headers=headers)
     try:
         data = res.text
         data = re.findall("vilos\.config\.media = ([\w\W]*?)\}\]\};", data)
@@ -56,11 +61,12 @@ def get_episode_url(episode_url):
                 url_m3u8.append(u)
     except Exception as e:
         print(e)
+        raise e
     return url_m3u8
     # return json.dumps({"list": url_m3u8})
-    # 获取视频评分，描述，年份，分类
 
 
+# 获取视频评分，描述，年份，分类
 def get_more_info(name, movie_id):
     movie_url = "https://www.crunchyroll.com" + name + "/videos"
     s = requests.session()
@@ -73,8 +79,8 @@ def get_more_info(name, movie_id):
     if len(video_info) == 0:
         video_info = html.xpath("//*[@id='sidebar_elements']/li[2]/p/span[1]/text()")
     video_mark = html.xpath("//*[@id='sidebar_elements']/li[3]/div/div[2]/span/span/@content")
-    video_publisher = html.xpath("//*[@id='sidebar_elements']/li[5]/ul/li[1]/a/text()")
-    video_tag = html.xpath('//*[@id="sidebar_elements"]/li[5]/ul/li[3]/a')
+    video_publisher = html.xpath("//*[@id='sidebar_elements']/li/ul/li[1]/a/text()")
+    video_tag = html.xpath('//*[@id="sidebar_elements"]/li/ul/li[2]/a/text()')
     video_year = html.xpath("//*[@id='sidebar_elements']/li[5]/ul/li[2]/text()")
     # 获取剧集信息
     count = 1
@@ -121,6 +127,8 @@ def get_episode_info(episode_url):
     if len(episode_info_1) == 0:
         return " "
     episode_info_2 = html.xpath("//*[@id='showmedia_about_info']/p/span[1]/text()")
+    if len(episode_info_2) == 0:
+        return episode_info_1
     episode_info = episode_info_1[0] + episode_info_2[0]
     return episode_info
 
@@ -140,7 +148,7 @@ def episode_insert(movie_id, episode_number, episode_name, episode_img, episode_
     except Exception as e:
         print(e + 'err:' + sql)
         db.rollback()
-        raise
+        raise e
     db.close()
 
 
@@ -152,15 +160,16 @@ def movie_insert(movie_id, movie_name, img_url, movie_url, publisher, movie_mark
     movie_name.replace("\"", "\'")
     # img_url = save_image(movie_name, img_url)
     sql = 'insert into movie values("%s","%s","%s","%s","%s","%s","%s","%s","%s")' % \
-          (movie_id, movie_name, img_url, movie_url, publisher, movie_type, movie_mark, movie_year, info)
+          (movie_id, movie_name, img_url, movie_url, publisher, movie_type, movie_mark, movie_year, db.escape(info))
     try:
         cursor.execute(sql)
         db.commit()
         print("video_name " + str(movie_name) + " insert suecess")
-    except:
-        print("err:" + sql)
+    except Exception as e:
+        print(e)
+        # print("err:" + sql)
         db.rollback()
-        raise
+        raise e
     db.close()
 
 
@@ -185,10 +194,10 @@ def movie_insert(movie_id, movie_name, img_url, movie_url, publisher, movie_mark
 
 
 if __name__ == "__main__":
-    pool = ThreadPoolExecutor(1)
+    pool = ThreadPoolExecutor(6)
     print("begin")
     url = "https://www.crunchyroll.com/videos/anime/popular/ajax_page?pg="
-    for page in range(0, 41):
-        # pool.submit(get_video_id, url, page)
-        get_video_id(url, page)
+    for page in range(1, 41):
+        pool.submit(get_video_id, url, page)
+        # get_video_id(url, page)
     print("end")

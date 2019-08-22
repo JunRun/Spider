@@ -71,7 +71,7 @@ def download_video(episode_id, episode_url, episode_name, movie_name):
                 if en_url.find(".m3u8") != -1:
                     break
         print(movie_name + ":" + episode_name + "  开始下载")
-        cdPath = "/Volumes/videos/crunchyroll_video/"
+        cdPath = "/videos/crunchyroll_video/"
         episode_name = str(uuid.uuid1())
         movie_name = movie_name.replace(" ", "\ ")
 
