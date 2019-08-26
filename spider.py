@@ -17,7 +17,7 @@ headers = {
 # 获取视频id,名字，图片
 def get_video_id(url, page):
     try:
-        time.sleep(4)
+        time.sleep(7)
         print("-----------------"+str(page)+"------------------------")
         url = url + str(page)
         s = requests.session()
@@ -63,7 +63,6 @@ def get_episode_url(episode_url):
         print(e)
         raise e
     return url_m3u8
-    # return json.dumps({"list": url_m3u8})
 
 
 # 获取视频评分，描述，年份，分类
@@ -88,8 +87,10 @@ def get_more_info(name, movie_id):
         rows = str(count)
         episode_number = html.xpath("//*[@id='showview_content_videos']/ul/li/ul/li[" + rows + "]/div/a/span/text()")
         episode_img = html.xpath("//*[@id='showview_content_videos']/ul/li/ul/li[" + rows + "]/div/a/img/@src")
-        episode_url = html.xpath("//*[@id='showview_content_videos']/ul/li/ul/li[" + rows + "]/div/a/@href")
+        episode_url_path = html.xpath("//*[@id='showview_content_videos']/ul/li/ul/li[" + rows + "]/div/a/@href")
         episode_name = html.xpath("//*[@id='showview_content_videos']/ul/li/ul/li[" + rows + "]/div/a/img/@alt")
+        if len(episode_url_path) == 0:
+            episode_url_path.append('null')
         if len(episode_number) == 0:
             break
         if len(episode_img) == 0:
@@ -97,11 +98,11 @@ def get_more_info(name, movie_id):
         # 保存图片
         # episode_img[0] = save_image(name, episode_img[0])
         episode_name = str(episode_name[0]).replace(' ', '').replace(',', ' ').replace("\"", "\'")
-        episode_info = get_episode_info(episode_url)
-        episodes = get_episode_url(episode_url)
+        episode_info = get_episode_info(episode_url_path)
+        episodes = get_episode_url(episode_url_path)
         # 剧集信息入库
         episode_insert(movie_id[0], episode_number[0].replace(' ', '').replace('/n', ''), episode_name, episode_img[0],
-                       episodes, episode_info)
+                       episodes, episode_info,episode_url_path[0])
         count = count + 1
     if len(video_publisher) == 0:
         video_publisher.append('')
@@ -134,19 +135,20 @@ def get_episode_info(episode_url):
 
 
 # 将剧集信息保存进入Mysql
-def episode_insert(movie_id, episode_number, episode_name, episode_img, episode_url, episode_info):
+def episode_insert(movie_id, episode_number, episode_name, episode_img, episode_url, episode_info, episode_url_path):
     db = pymysql.connect("localhost", "root", "root@cpx", "shows")
     cursor = db.cursor()
-    sql = 'insert into episode(movie_id,episode_number,episode_name,episode_img,episode_url,download,episode_info) ' \
-          'values("%s","%s","%s","%s","%s",%s,"%s")' % \
-          (movie_id, episode_number, db.escape(episode_name), episode_img, episode_url, 0, db.escape(episode_info))
+    sql = 'insert into episode(movie_id,episode_number,episode_name,episode_img,episode_url,download,episode_info,episode_url_path) ' \
+          'values("%s","%s","%s","%s","%s",%s,"%s","%s")' % \
+          (movie_id, episode_number, db.escape(episode_name), episode_img, episode_url, 0, db.escape(episode_info), episode_url_path)
     try:
         cursor.execute(sql)
         db.commit()
         print(episode_name + "保存成功")
 
     except Exception as e:
-        print(e + 'err:' + sql)
+        print(e)
+        print('err:' + sql)
         db.rollback()
         raise e
     db.close()
@@ -164,7 +166,7 @@ def movie_insert(movie_id, movie_name, img_url, movie_url, publisher, movie_mark
     try:
         cursor.execute(sql)
         db.commit()
-        print("video_name " + str(movie_name) + " insert suecess")
+        print("video_name " + str(movie_name) + " insert ")
     except Exception as e:
         print(e)
         # print("err:" + sql)
@@ -194,7 +196,7 @@ def movie_insert(movie_id, movie_name, img_url, movie_url, publisher, movie_mark
 
 
 if __name__ == "__main__":
-    pool = ThreadPoolExecutor(6)
+    pool = ThreadPoolExecutor(10)
     print("begin")
     url = "https://www.crunchyroll.com/videos/anime/popular/ajax_page?pg="
     for page in range(1, 41):
